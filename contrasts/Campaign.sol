@@ -9,9 +9,15 @@ contract Campaign {
         bool complete;
     }
 
+    Request[] public requests;
     address public manager;
     uint public minContribution;
     address[] public approveAddresses;
+
+    modifier restricted() {
+        require(msg.sender == manager);
+        _;
+    }
 
     constructor(uint min) {
         manager = msg.sender;
@@ -21,5 +27,16 @@ contract Campaign {
     function contribute() public payable {
         require(msg.value > minContribution);
         approveAddresses.push(msg.sender);
+    }
+
+    function createRequest(string description, uint value, address recipient) public restricted {
+       Request request = Request({
+        description: description,
+        value: value,
+        recipient: recipient,
+        complete: false
+       });
+
+       requests.push(request);
     }
 }
