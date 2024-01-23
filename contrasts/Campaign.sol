@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.9;
 
@@ -29,8 +30,8 @@ contract Campaign {
         approveAddresses.push(msg.sender);
     }
 
-    function createRequest(string description, uint value, address recipient) public restricted {
-       Request request = Request({
+    function createRequest(string memory description, uint value, address recipient) public restricted {
+       Request memory request = Request({
         description: description,
         value: value,
         recipient: recipient,
