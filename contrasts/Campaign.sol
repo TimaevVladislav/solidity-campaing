@@ -7,6 +7,8 @@ contract Campaign {
         string description;
         uint value;
         address recipient;
+        uint approvalCount;
+        mapping (address => bool) approvals;
         bool complete;
     }
 
@@ -35,13 +37,16 @@ contract Campaign {
         description: description,
         value: value,
         recipient: recipient,
+        approvals: "",
+        approvalCount: 0,
         complete: false
        });
 
        requests.push(request);
     }
 
-    function approveRequest() public restricted {
-       
+    function approveRequest(uint index) public {
+       require(approveAddresses[msg.sender]);
+       require(!requests[index].approvals[msg.sender]);
     }
 }
