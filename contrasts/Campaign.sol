@@ -8,7 +8,7 @@ contract Campaign {
         uint value;
         address recipient;
         uint approvalCount;
-        // mapping (address => bool) approvals;
+        mapping (address => bool) approvals;
         bool complete;
     }
 
@@ -33,16 +33,12 @@ contract Campaign {
     }
 
     function createRequest(string memory description, uint value, address recipient) public restricted {
-       Request memory request = Request({
-        description: description,
-        value: value,
-        recipient: recipient,
-        // approvals: "",
-        approvalCount: 0,
-        complete: false
-       });
-
-       requests.push(request);
+       Request storage request = requests.push();
+       request.description = description;
+       request.value = value;
+       request.recipient = recipient;
+       request.approvalCount = 0;
+       request.complete = false;
     }
 
     function approveRequest(uint index) public {
