@@ -4,9 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "node compile.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "ganache": "^7.9.2",
+    "mocha": "^10.2.0",
+    "solc": "^0.8.24",
+    "web3": "^4.4.0"
+  }
 }
